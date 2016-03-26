@@ -1,0 +1,6 @@
+nginx/logs/error.log
+nginx/logs/access.log
+nginx/logs/nginx.pid
+nginx/tmp/*_temp
+.pyc
+__pycache__
