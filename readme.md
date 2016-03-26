@@ -10,11 +10,15 @@ configurations for the sake of testing.
 
 ## Domains
 
+Various "good" configurations:
+
  - [domain-match.badtls.io:10000](https://domain-match.badtls.io:10000)
  - [wildcard-match.badtls.io:10001](https://wildcard-match.badtls.io:10001)
  - [san-match.badtls.io:10002](https://san-match.badtls.io:10002)
  - [required-auth.badtls.io:10003](https://required-auth.badtls.io:10003)
  - [optional-auth.badtls.io:10004](https://optional-auth.badtls.io:10004)
+
+Various "bad" configurations:
 
  - [expired-1963.badtls.io:11000](https://expired-1963.badtls.io:11000)
  - [future.badtls.io:11001](https://future.badtls.io:11001)
@@ -22,6 +26,14 @@ configurations for the sake of testing.
  - [san-mismatch.badtls.io:11003](https://san-mismatch.badtls.io:11003)
  - [weak-sig.badtls.io:11004](https://weak-sig.badtls.io:11004)
  - [bad-key-usage.badtls.io:11005](https://bad-key-usage.badtls.io:11005)
+
+## CA Certificate
+
+In order to properly test TLS connections, the CA certificate used for the
+various domains will need to be added to the trust store/list used by the
+code or application being tested.
+
+The CA certificate is located at [certs/ca.crt](certs/ca.crt).
 
 ## Running Locally
 
