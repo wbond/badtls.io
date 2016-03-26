@@ -29,6 +29,7 @@ def generate_auth_cert(domain, base_year, quiet=False):
     )
     builder.issuer = ca_cert
     builder.subject_alt_domains = [
+        'required-auth.{}'.format(domain),
         'optional-auth.{}'.format(domain),
     ]
     builder.begin_date = datetime(base_year, 1, 1, 0, 0, 0, tzinfo=timezone.utc)
