@@ -16,7 +16,7 @@ def generate_client_certs(domain, base_year, quiet=False):
     ca2_private_key = load_private('ca2')
     ca2_cert = load_cert('ca2')
     public_key = load_public('client')
-    crl_url = 'http://client-crl.{}'.format(domain)
+    crl_url = 'http://crls.{}:9991/client.crl'.format(domain)
 
     # Certificate that is valid
     if not quiet:

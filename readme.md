@@ -37,13 +37,13 @@ The CA certificate is located at [certs/ca.crt](certs/ca.crt).
 
 ## Running Locally
 
-To use the certificates for testing, `nginx` must be installed. All of the
-domains run on non-privileged ports for ease-of-use.
+To use the certificates for testing, `nginx` and `socat` must be installed. All
+of the domains run on non-privileged ports for ease-of-use.
 
-To start nginx, execute:
+To start nginx and socat, execute:
 
 ```bash
-nginx -p ./nginx
+bash ./scripts/local.sh
 ```
 
 ## Installing
@@ -80,6 +80,11 @@ the arguments:
 ```bash
 python scripts/install.py overwite {nginx_conf_dir} {nginx_ssl_dir} {wwwroot_dir}
 ```
+
+Additionally, socat will need to be configured to run on port 10003 using
+the configuration from [scripts/local.sh](scripts/local.sh). This allows proper
+testing of a host requiring client certificates. Unfortunately nginx does not
+allow requiring certificates at the TLS protocol level.
 
 ## Generating New Certificates
 
