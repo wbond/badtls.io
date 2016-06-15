@@ -42,14 +42,14 @@ def generate_pair(name, quiet=False, key_type='rsa', key_size=2048):
         write('done')
 
 
-def generate_dh_params(quiet=False, size=2048):
+def generate_dh_params(name, quiet=False, size=2048):
 
     if not quiet:
         write('Generating DH params, this could take a few minutes ... ', end='')
 
     dh_params = asymmetric.generate_dh_parameters(size)
 
-    with open(path.join(certs_dir, 'dhparam.pem'), 'wb') as f:
+    with open(path.join(certs_dir, '{}.pem'.format(name)), 'wb') as f:
         f.write(asymmetric.dump_dh_parameters(dh_params))
 
     if not quiet:

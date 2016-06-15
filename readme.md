@@ -17,6 +17,7 @@ Various "good" configurations:
  - [san-match.badtls.io:10002](https://san-match.badtls.io:10002)
  - [required-auth.badtls.io:10003](https://required-auth.badtls.io:10003)
  - [optional-auth.badtls.io:10004](https://optional-auth.badtls.io:10004)
+ - [dh1024.badtls.io:10005](https://dh1024.badtls.io:10005)
 
 Various "bad" configurations:
 
@@ -26,6 +27,11 @@ Various "bad" configurations:
  - [san-mismatch.badtls.io:11003](https://san-mismatch.badtls.io:11003)
  - [weak-sig.badtls.io:11004](https://weak-sig.badtls.io:11004)
  - [bad-key-usage.badtls.io:11005](https://bad-key-usage.badtls.io:11005)
+ - [dh512.badtls.io:11006](https://dh512.badtls.io:11006)
+ - [wildcard.mismatch.badtls.io:11007](https://wildcard.mismatch.badtls.io:11007)
+ - [rc4.badtls.io:11008](https://rc4.badtls.io:11008)
+ - [rc4-md5.badtls.io:11009](https://rc4-md5.badtls.io:11009)
+ - [expired.badtls.io:11010](https://expired.badtls.io:11010)
 
 ## CA Certificate
 
