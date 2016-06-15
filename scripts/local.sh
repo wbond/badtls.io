@@ -26,7 +26,7 @@ NGINX_PID=$!
 
 sleep 0.5
 
-$SOCAT tcp:localhost:9990 openssl-listen:10003,reuseaddr,fork,cipher=HIGH,cert=./certs/auth.crt,key=./certs/host.key,dhparam=./certs/dhparam.pem,cafile=./certs/ca.crt,verify=1 &
+$SOCAT tcp:localhost:9990 openssl-listen:10003,reuseaddr,fork,cipher=EECDH+AESGCM:EDH+AESGCM:AES256+EECDH:AES256+EDH:DES-CBC3-SHA,cert=./certs/auth.crt,key=./certs/host.key,dhparam=./certs/dhparam.pem,cafile=./certs/ca.crt,verify=1 &
 SOCAT_PID=$!
 
 wait
