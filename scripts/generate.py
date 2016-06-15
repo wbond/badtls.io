@@ -53,5 +53,4 @@ if __name__ == '__main__':
     generate_keys()
     generate_certs(domain, base_year)
     generate_dh_params('dhparam')
-    generate_dh_params('dhparam-512', size=512)
     generate_dh_params('dhparam-1024', size=1024)
