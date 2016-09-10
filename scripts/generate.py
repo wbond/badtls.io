@@ -10,6 +10,7 @@ from cert_ca2 import generate_ca2_cert
 from cert_domain_match import generate_domain_match_cert
 from cert_wildcard import generate_wildcard_cert
 from cert_san_match import generate_san_match_cert
+from cert_no_san import generate_no_san_cert
 from cert_expired import generate_expired_cert
 from cert_expired_1963 import generate_expired_1963_cert
 from cert_future import generate_future_cert
@@ -34,6 +35,7 @@ def generate_certs(domain, base_year, quiet=False):
     generate_domain_match_cert(domain, base_year, quiet)
     generate_wildcard_cert(domain, base_year, quiet)
     generate_san_match_cert(domain, base_year, quiet)
+    generate_no_san_cert(domain, base_year, quiet)
     generate_expired_cert(domain, base_year, quiet)
     generate_expired_1963_cert(domain, quiet)
     generate_future_cert(domain, base_year, quiet)
