@@ -18,6 +18,7 @@ Various "good" configurations:
  - [required-auth.badtls.io:10003](https://required-auth.badtls.io:10003)
  - [optional-auth.badtls.io:10004](https://optional-auth.badtls.io:10004)
  - [dh1024.badtls.io:10005](https://dh1024.badtls.io:10005)
+ - [no-san.badtls.io:10006](https://no-san.badtls.io:10006)
 
 Various "bad" configurations:
 

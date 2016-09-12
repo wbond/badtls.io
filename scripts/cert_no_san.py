@@ -9,11 +9,10 @@ from certbuilder import CertificateBuilder
 from _util import load_public, load_private, load_cert, dump_cert, write
 
 
-def generate_expired_cert(domain, base_year, quiet=False):
+def generate_no_san_cert(domain, base_year, quiet=False):
     if not quiet:
-        write('Generating expired cert ... ', end='')
+        write('Generating domain-match cert ... ', end='')
 
-    full_domain = 'expired.{}'.format(domain)
     ca_private_key = load_private('ca')
     ca_cert = load_cert('ca')
     public_key = load_public('host')
@@ -24,17 +23,16 @@ def generate_expired_cert(domain, base_year, quiet=False):
             'state_or_province_name': 'Massachusetts',
             'locality_name': 'Newbury',
             'organization_name': 'Bad TLS Limited',
-            'common_name': full_domain,
+            'common_name': 'no-san.{}'.format(domain),
         },
         public_key
     )
     builder.issuer = ca_cert
-    builder.subject_alt_domains = [full_domain]
-    builder.begin_date = datetime(base_year - 1, 1, 1, 0, 0, 0, tzinfo=timezone.utc)
-    builder.end_date = datetime(base_year, 1, 1, 0, 0, 0, tzinfo=timezone.utc)
+    builder.begin_date = datetime(base_year, 1, 1, 0, 0, 0, tzinfo=timezone.utc)
+    builder.end_date = datetime(base_year + 3, 1, 1, 0, 0, 0, tzinfo=timezone.utc)
     certificate = builder.build(ca_private_key)
 
-    dump_cert('expired', certificate)
+    dump_cert('no-san', certificate)
 
     if not quiet:
         write('done')
