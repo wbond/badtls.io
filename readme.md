@@ -120,3 +120,9 @@ To generate all keys and certificates, execute the following, replacing
 ```bash
 python scripts/generate.py {domain}
 ```
+
+If only domain certs need to be regenerated, use:
+
+```bash
+python scripts/generate.py --regen-certs {domain}
+```

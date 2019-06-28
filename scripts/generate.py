@@ -29,9 +29,8 @@ def generate_keys(quiet=False):
     generate_host_keys(quiet)
     generate_client_keys(quiet)
 
-def generate_certs(domain, base_year, quiet=False):
-    generate_ca_cert(base_year, quiet)
-    generate_ca2_cert(base_year, quiet)
+
+def generate_domain_certs(domain, base_year, quiet=False):
     generate_domain_match_cert(domain, base_year, quiet)
     generate_wildcard_cert(domain, base_year, quiet)
     generate_san_match_cert(domain, base_year, quiet)
@@ -45,14 +44,26 @@ def generate_certs(domain, base_year, quiet=False):
     generate_client_certs(domain, base_year, quiet)
 
 
+def generate_certs(domain, base_year, quiet=False):
+    generate_ca_cert(base_year, quiet)
+    generate_ca2_cert(base_year, quiet)
+    generate_domain_certs(domain, base_year, quiet)
+
+
 if __name__ == '__main__':
     domain = get_arg(1)
+    regen_certs = domain == '--regen-certs'
+    if regen_certs:
+        domain = get_arg(2)
     if domain is None:
         domain = 'badtls.io'
 
     base_year = datetime.date.today().year
 
-    generate_keys()
-    generate_certs(domain, base_year)
-    generate_dh_params('dhparam')
-    generate_dh_params('dhparam-1024', size=1024)
+    if regen_certs:
+        generate_domain_certs(domain, base_year)
+    else:
+        generate_keys()
+        generate_certs(domain, base_year)
+        generate_dh_params('dhparam')
+        generate_dh_params('dhparam-1024', size=1024)
