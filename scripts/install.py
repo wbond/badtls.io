@@ -99,7 +99,7 @@ if __name__ == '__main__':
 
     with open(src_badtls_conf_path, 'r', encoding='utf-8') as f:
         badtls_conf = f.read()
-        badtls_conf = badtls_conf.replace('../wwwroot', dest_wwwroot_dir)
+        badtls_conf = badtls_conf.replace('wwwroot', dest_wwwroot_dir)
         badtls_conf = badtls_conf.replace('../../certs', dest_certs_dir)
 
     with open(dest_badtls_conf_path, 'w', encoding='utf-8') as f:

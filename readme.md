@@ -43,10 +43,10 @@ The CA certificate is located at [certs/ca.crt](certs/ca.crt).
 
 ## Running Locally
 
-To use the certificates for testing, `nginx` and `socat` must be installed. All
+To use the certificates for testing, `nginx` must be installed. All
 of the domains run on non-privileged ports for ease-of-use.
 
-To start nginx and socat, execute:
+To start nginx, execute:
 
 ```bash
 bash ./scripts/local.sh

@@ -15,25 +15,35 @@ if [[ $NGINX == "" ]]; then
     exit 1
 fi
 
-SOCAT=$(which socat)
-if [[ $SOCAT == "" ]]; then
-    >&2 echo "socat could not be found"
-    exit 2
+SCRIPT="$0"
+if [[ $(readlink $SCRIPT) != "" ]]; then
+    SCRIPT=$(dirname $SCRIPT)/$(readlink $SCRIPT)
 fi
+if [[ $0 = ${0%/*} ]]; then
+    SCRIPT=$(pwd)/$0
+fi
+BADTLS_DIR=$(cd ${SCRIPT%/*}/.. && pwd -P)
 
-$NGINX -p ./nginx &
+MACHINE_TYPE=$(uname -sm | sed -e 's/ /-/' | tr '[:upper:]' '[:lower:]')
+SOCAT="$BADTLS_DIR/bin/socat-$MACHINE_TYPE"
+
+$NGINX -p "$BADTLS_DIR/nginx" -c "$BADTLS_DIR/nginx/conf/nginx.conf" &
 NGINX_PID=$!
 
-sleep 0.5
+sleep 1.5
 
 $SOCAT tcp:localhost:9990 openssl-listen:10003,reuseaddr,fork,cipher=EECDH+AESGCM:EDH+AESGCM:AES256+EECDH:AES256+EDH:DES-CBC3-SHA,cert=./certs/auth.crt,key=./certs/host.key,dhparam=./certs/dhparam.pem,cafile=./certs/ca.crt,verify=1 &
-SOCAT_PID=$!
+SOCAT_CLIENT_AUTH_PID=$!
+
+$SOCAT tcp:localhost:9992 openssl-listen:11004,reuseaddr,fork,cipher=EECDH+AESGCM:EDH+AESGCM:AES256+EECDH:AES256+EDH:DES-CBC3-SHA,cert=./certs/weak-sig.crt,key=./certs/host.key,dhparam=./certs/dhparam.pem,cafile=./certs/ca.crt,verify=1 &
+SOCAT_MD5_PID=$!
 
 wait
 
 cleanup() {
-    kill $NGINX 2> /dev/null
-    kill $SOCAT_PID 2> /dev/null
+    kill $NGINX_PID 2> /dev/null
+    kill $SOCAT_CLIENT_AUTH_PID 2> /dev/null
+    kill $SOCAT_MD5_PID 2> /dev/null
 }
 
 trap 'cleanup' 1 2 3 15 EXIT
