@@ -31,7 +31,7 @@ def generate_future_cert(domain, base_year, quiet=False):
     builder.issuer = ca_cert
     builder.subject_alt_domains = [full_domain]
     builder.begin_date = datetime(base_year + 10, 1, 1, 0, 0, 0, tzinfo=timezone.utc)
-    builder.end_date = datetime(base_year + 13, 1, 1, 0, 0, 0, tzinfo=timezone.utc)
+    builder.end_date = datetime(base_year + 11, 1, 1, 0, 0, 0, tzinfo=timezone.utc)
     certificate = builder.build(ca_private_key)
 
     dump_cert('future', certificate)

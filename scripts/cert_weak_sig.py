@@ -33,7 +33,7 @@ def generate_weak_sig_cert(domain, base_year, quiet=False):
     # Hack since API doesn't allow selection of weak algo
     builder._hash_algo = 'md5'
     builder.begin_date = datetime(base_year, 1, 1, 0, 0, 0, tzinfo=timezone.utc)
-    builder.end_date = datetime(base_year + 3, 1, 1, 0, 0, 0, tzinfo=timezone.utc)
+    builder.end_date = datetime(base_year + 1, 1, 1, 0, 0, 0, tzinfo=timezone.utc)
     certificate = builder.build(ca_private_key)
 
     dump_cert('weak-sig', certificate)

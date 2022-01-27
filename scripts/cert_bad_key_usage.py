@@ -31,7 +31,7 @@ def generate_bad_key_usage_cert(domain, base_year, quiet=False):
     builder.issuer = ca_cert
     builder.subject_alt_domains = [full_domain]
     builder.begin_date = datetime(base_year, 1, 1, 0, 0, 0, tzinfo=timezone.utc)
-    builder.end_date = datetime(base_year + 3, 1, 1, 0, 0, 0, tzinfo=timezone.utc)
+    builder.end_date = datetime(base_year + 1, 1, 1, 0, 0, 0, tzinfo=timezone.utc)
     builder.key_usage = set(['crl_sign'])
     builder.extended_key_usage = set(['email_protection'])
     certificate = builder.build(ca_private_key)
